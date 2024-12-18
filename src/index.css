@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --green-gradient: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    --luxury-gradient: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.2);
+  }
+  
+  body {
+    @apply antialiased text-slate-900 bg-slate-50;
+  }
+
+  /* Smooth scrolling for the entire app */
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Neon effects */
+  .shadow-neon-green {
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.3),
+                0 0 20px rgba(34, 197, 94, 0.2),
+                0 0 30px rgba(34, 197, 94, 0.1);
+  }
+
+  .text-glow-green {
+    text-shadow: 0 0 10px rgba(34, 197, 94, 0.5),
+                 0 0 20px rgba(34, 197, 94, 0.3);
+  }
+
+  .glass-panel {
+    @apply backdrop-blur-md bg-white/80 border border-white/20;
+  }
+
+  .luxury-shadow {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-blur {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .scrollbar-custom {
+    scrollbar-width: thin;
+    scrollbar-color: #94a3b8 transparent;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 hover:bg-slate-400 rounded-full transition-colors;
+  }
+
+  /* Luxury button styles */
+  .btn-luxury {
+    @apply relative overflow-hidden transition-all duration-300;
+  }
+
+  .btn-luxury::after {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+  }
+
+  .btn-luxury:hover::after {
+    @apply opacity-100;
+  }
+
+  /* Message animations */
+  .message-appear {
+    animation: messageSlideIn 0.3s ease-out forwards;
+  }
+
+  @keyframes messageSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Markdown styles */
+  .prose {
+    @apply text-slate-900 dark:text-slate-100;
+  }
+
+  .prose-green {
+    @apply text-green-400;
+  }
+
+  .prose code {
+    @apply text-sm px-1 py-0.5 rounded;
+  }
+
+  .prose pre {
+    @apply p-3 rounded-lg overflow-x-auto;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 pl-3 my-2 italic;
+  }
+
+  .prose ul {
+    @apply list-disc pl-4 my-2;
+  }
+
+  .prose ol {
+    @apply list-decimal pl-4 my-2;
+  }
+
+  .prose li {
+    @apply my-1;
+  }
+
+  .prose a {
+    @apply underline;
+  }
+
+  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    @apply font-bold;
+  }
+}
+
+/* Panel Resize Handle Styles */
+[data-panel-resize-handle-id] {
+  @apply bg-slate-200/50 backdrop-blur-sm transition-all duration-300;
+}
+
+[data-panel-resize-handle-id]:hover {
+  @apply bg-green-400;
+}
+
+[data-panel-group-direction="horizontal"] > [data-panel-resize-handle-id] {
+  @apply w-1 mx-1 cursor-col-resize;
+}
+
+[data-panel-group-direction="vertical"] > [data-panel-resize-handle-id] {
+  @apply h-1 my-1 cursor-row-resize;
+}
+
+/* Luxury transitions */
+.nav-transition {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.sidebar-transition {
+  @apply transition-all duration-500 ease-in-out;
+}
+
+/* Chat interface specific styles */
+.chat-container {
+  background-image: radial-gradient(circle at center, rgba(34, 197, 94, 0.05) 0%, transparent 70%);
+}
+
+.message-bubble {
+  @apply transition-transform duration-300 ease-out hover:scale-[1.01];
+}
+
+/* Builder mode specific styles */
+.builder-mode .message-bubble.user {
+  @apply bg-black border-2 border-green-400 text-green-400;
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.2);
+}
+
+.builder-mode .message-bubble.assistant {
+  @apply bg-black border border-green-400/50 text-green-400;
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.1);
+}
+
+/* Workforce mode styles */
+.workforce-mode .message-bubble.user {
+  @apply bg-gradient-to-r from-green-600 to-green-700 text-white;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.1);
+}
+
+.workforce-mode .message-bubble.assistant {
+  @apply bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
